@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kids Toy Store</title>
+<style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box}
+    html{
+    scroll-behavior:smooth}
+    body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f7f8ff;
+    color:#20223a}
+    a{
+    text-decoration:none;
+    color:inherit}
+    button,input,textarea,select{
+    font:inherit}
+    :root{
+    --primary:#5b4bdb;
+    --secondary:#8b5cf6;
+    --yellow:#ffd43b;
+    --dark:#17182d;
+    --white:#fff;
+    --shadow:0 12px 35px rgba(50,40,120,.12)}
+    .header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(15px);
+    box-shadow:0 2px 20px rgba(0,0,0,.07)}
+    .nav{
+    max-width:1200px;
+    margin:auto;
+    padding:15px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between}
+    .logo{
+    font-size:25px;
+    font-weight:900;
+    color:var(--primary)}
+    .logo span{
+    color:#ffb000}
+    .navlinks{
+    display:flex;
+    gap:25px;
+    align-items:center}
+    .navlinks a{
+    font-weight:700;
+    font-size:14px}
+    .navlinks a:hover{
+    color:var(--primary)}
+    .menuBtn{
+    display:none;
+    border:0;
+    background:var(--primary);
+    color:white;
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:21px}
+    .hero{
+    background:linear-gradient(135deg,#5b4bdb,#8b5cf6,#ffcf33);
+    color:white;
+    padding:75px 20px;
+    text-align:center}
+    .hero h1{
+    font-size:clamp(35px,6vw,65px);
+    font-weight:900}
+    .hero p{
+    max-width:650px;
+    margin:18px auto 28px;
+    font-size:18px;
+    line-height:1.6}
+    .heroBtns{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap}
+    .btn{
+    border:0;
+    padding:13px 21px;
+    border-radius:13px;
+    cursor:pointer;
+    font-weight:800;
+    transition:.25s}
+    .btn:hover{
+    transform:translateY(-2px)}
+    .btnPrimary{
+    background:white;
+    color:var(--primary)}
+    .btnDark{
+    background:#19182d;
+    color:white}
+    .section{
+    max-width:1200px;
+    margin:auto;
+    padding:60px 20px}
+    .title{
+    text-align:center;
+    margin-bottom:30px}
+    .title h2{
+    font-size:35px;
+    margin-bottom:8px}
+    .title p{
+    color:#777}
+    .categories{
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:12px}
+    .cat{
+    background:white;
+    padding:18px 8px;
+    border-radius:16px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    font-weight:800;
+    font-size:13px;
+    transition:.25s}
+    .cat:hover{
+    transform:translateY(-5px);
+    background:#f0edff;
+    color:var(--primary)}
+    .shopTools{
+    display:flex;
+    gap:12px;
+    justify-content:space-between;
+    margin-bottom:25px;
+    flex-wrap:wrap}
+    .search{
+    flex:1;
+    min-width:220px;
+    padding:14px 17px;
+    border:1px solid #ddd;
+    border-radius:14px;
+    outline:none;
+    background:white}
+    .filter{
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:14px;
+    background:white}
+    .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px}
+    .card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    transition:.25s}
+    .card:hover{
+    transform:translateY(-6px)}
+    .card img{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+    display:block}
+    .cardBody{
+    padding:17px}
+    .card h3{
+    font-size:17px;
+    margin-bottom:8px}
+    .desc{
+    font-size:13px;
+    color:#777;
+    min-height:35px}
+    .price{
+    margin:13px 0;
+    font-size:21px;
+    font-weight:900;
+    color:var(--primary)}
+    .old{
+    text-decoration:line-through;
+    color:#999;
+    font-size:13px;
+    margin-left:6px}
+    .cardBtns{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px}
+    .shopBtn{
+    background:var(--primary);
+    color:white}
+    .waBtn{
+    background:#20c063;
+    color:white}
+    .about{
+    background:linear-gradient(135deg,#f0edff,#fff);
+    border-radius:25px;
+    padding:35px}
+    .features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:25px}
+    .feature{
+    background:white;
+    border-radius:17px;
+    padding:20px;
+    box-shadow:0 7px 25px rgba(0,0,0,.06)}
+    .feature b{
+    display:block;
+    margin-bottom:7px}
+    .contactBox{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px}
+    .contactCard{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:var(--shadow)}
+    .contactCard h3{
+    margin-bottom:10px;
+    color:var(--primary)}
+    footer{
+    background:#17182d;
+    color:#ddd;
+    padding:50px 20px 25px}
+    .footerGrid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:35px}
+    footer h3,footer h4{
+    color:white;
+    margin-bottom:14px}
+    footer p,footer li{
+    font-size:14px;
+    line-height:1.8;
+    color:#bbb}
+    footer ul{
+    list-style:none}
+    .copyright{
+    max-width:1200px;
+    margin:35px auto 0;
+    padding-top:20px;
+    border-top:1px solid #333;
+    text-align:center;
+    font-size:13px;
+    color:#999}
+    .floatWA{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:1200;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:#20c063;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:27px;
+    box-shadow:0 8px 25px rgba(0,0,0,.25)}
+    .modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(10,10,30,.72);
+    z-index:2000;
+    padding:15px;
+    overflow:auto}
+    .modalBox{
+    max-width:650px;
+    margin:25px auto;
+    background:white;
+    border-radius:25px;
+    padding:22px;
+    position:relative}
+    .close{
+    position:absolute;
+    right:15px;
+    top:12px;
+    border:0;
+    background:#eee;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:20px}
+    .modalProduct{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    margin-bottom:20px;
+    padding-right:40px}
+    .modalProduct img{
+    width:90px;
+    height:90px;
+    object-fit:cover;
+    border-radius:15px}
+    .modalProduct h2{
+    font-size:20px}
+    .modalPrice{
+    color:var(--primary);
+    font-weight:900;
+    margin-top:6px}
+    .formTitle{
+    margin:20px 0 12px}
+    .formNote{
+    background:#fff8d9;
+    padding:11px;
+    border-radius:12px;
+    font-size:12px;
+    color:#685600;
+    margin-bottom:15px}
+    .formGrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px}
+    .field label{
+    display:block;
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:5px}
+    .field input,.field textarea,.field select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:11px;
+    outline:none;
+    background:#fff}
+    .field textarea{
+    height:85px;
+    resize:vertical}
+    .full{
+    grid-column:1/-1}
+    .submitBtn{
+    width:100%;
+    padding:15px;
+    border:0;
+    border-radius:13px;
+    background:#20c063;
+    color:white;
+    font-weight:900;
+    cursor:pointer;
+    margin-top:15px}
+    .scanner{
+    margin-top:20px;
+    text-align:center;
+    background:#f7f7ff;
+    border-radius:18px;
+    padding:18px}
+    .scanner h3{
+    margin-bottom:8px}
+    .scanner img{
+    width:240px;
+    height:240px;
+    object-fit:contain;
+    background:white;
+    border-radius:12px;
+    margin:10px auto;
+    display:block;
+    border:1px dashed #aaa}
+    .scanText{
+    font-size:13px;
+    color:#666}
+    .modalOrder{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:13px;
+    background:var(--primary);
+    color:white;
+    font-weight:900;
+    cursor:pointer;
+    margin-top:10px}
+    .noProducts{
+    text-align:center;
+    padding:40px;
+    grid-column:1/-1;
+    color:#777}
+    @media(max-width:1000px){
+    .categories{
+    grid-template-columns:repeat(4,1fr)}
+    .grid{
+    grid-template-columns:repeat(3,1fr)}
+    .footerGrid{
+    grid-template-columns:2fr 1fr 1fr}
+    }
+    @media(max-width:700px){
+    .navlinks{
+    display:none;
+    position:absolute;
+    top:72px;
+    left:12px;
+    right:12px;
+    background:white;
+    padding:18px;
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    flex-direction:column;
+    align-items:flex-start}
+    .navlinks.active{
+    display:flex}
+    .menuBtn{
+    display:block}
+    .categories{
+    grid-template-columns:repeat(2,1fr)}
+    .grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px}
+    .card img{
+    height:165px}
+    .cardBody{
+    padding:12px}
+    .cardBtns{
+    grid-template-columns:1fr}
+    .features{
+    grid-template-columns:1fr}
+    .contactBox{
+    grid-template-columns:1fr}
+    .footerGrid{
+    grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:430px){
+    .grid{
+    grid-template-columns:1fr 1fr}
+    .card h3{
+    font-size:14px}
+    .price{
+    font-size:17px}
+    .formGrid{
+    grid-template-columns:1fr}
+    .full{
+    grid-column:auto}
+    .footerGrid{
+    grid-template-columns:1fr}
+    }
+</style>
+</head>
+<body>
+<header class="header">
+<nav class="nav">
+<div class="logo" id="logoName">YOUR STORE <span>★</span>
+</div>
+<div class="navlinks" id="navLinks">
+<a href="#home">Home</a>
+<a href="#categories">Categories</a>
+<a href="#shop">Shop</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</div>
+<button class="menuBtn" onclick="toggleMenu()">☰</button>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<h1>Best Toys for Happy Kids 🧸</h1>
+<p>Fun, colourful and educational toys for every little dreamer. Choose your favourite toy and order easily.</p>
+<div class="heroBtns">
+<a class="btn btnPrimary" href="#shop">Shop Now</a>
+<a class="btn btnDark" href="#categories">Explore Toys</a>
+</div>
+</section>
+
+<section class="section" id="categories">
+<div class="title">
+<h2>Shop by Category</h2>
+<p>Find the perfect toy for your child</p>
+</div>
+<div class="categories">
+        <div class="cat" onclick="filterCategory('Baby Toys')">👶<br>Baby Toys</div>
+<div class="cat" onclick="filterCategory('Remote Control')">🚗<br>RC Toys</div>
+<div class="cat" onclick="filterCategory('Educational')">🧠<br>Educational</div>
+<div class="cat" onclick="filterCategory('Dolls')">👧<br>Dolls</div>
+<div class="cat" onclick="filterCategory('Soft Toys')">🧸<br>Soft Toys</div>
+<div class="cat" onclick="filterCategory('Outdoor')">⚽<br>Outdoor</div>
+<div class="cat" onclick="filterCategory('Vehicles')">🚙<br>Vehicles</div>
+<div class="cat" onclick="filterCategory('Games')">🧩<br>Games</div>
+</div>
+</section>
+
+<section class="section" id="shop">
+<div class="title">
+<h2>Our Toys</h2>
+<p>Choose your favourite toy</p>
+</div>
+<div class="shopTools">
+<input class="search" id="search" type="search" placeholder="🔎 Search toys..." oninput="renderProducts()">
+<select class="filter" id="categoryFilter" onchange="renderProducts()">
+<option value="All">All Categories</option>
+<option>Baby Toys</option>
+<option>Remote Control</option>
+<option>Educational</option>
+<option>Dolls</option>
+<option>Soft Toys</option>
+<option>Outdoor</option>
+<option>Vehicles</option>
+<option>Games</option>
+</select>
+</div>
+<div class="grid" id="productGrid">
+</div>
+</section>
+
+<section class="section" id="about">
+<div class="about">
+<div class="title">
+<h2>Why Choose Us?</h2>
+<p>A simple and trusted way to order kids toys.</p>
+</div>
+<div class="features">
+<div class="feature">
+<b>🧸 Quality Toys</b>Carefully selected fun and attractive toys.</div>
+<div class="feature">
+<b>💰 Affordable Prices</b>Great toys at pocket-friendly prices.</div>
+<div class="feature">
+<b>📱 Easy WhatsApp Ordering</b>Order directly through WhatsApp.</div>
+<div class="feature">
+<b>🔐 UPI Payment</b>Pay using the payment scanner.</div>
+<div class="feature">
+<b>🚚 Delivery</b>Customer address is collected for delivery.</div>
+<div class="feature">
+<b>💬 Customer Support</b>Contact us easily through WhatsApp.</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="contact">
+<div class="title">
+<h2>Contact Us</h2>
+<p>We're happy to help.</p>
+</div>
+<div class="contactBox">
+<div class="contactCard">
+<h3>📱 WhatsApp</h3>
+<p>For orders and support, contact us on WhatsApp.</p>
+</div>
+<div class="contactCard">
+<h3>🚚 Delivery</h3>
+<p>Enter your complete delivery address while placing your order.</p>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footerGrid">
+<div>
+<h3 id="footerName">YOUR STORE</h3>
+<p>A colourful kids toy store offering fun, educational and exciting toys for children.</p>
+</div>
+<div>
+<h4>Quick Links</h4>
+<ul>
+<li>
+<a href="#home">Home</a>
+</li>
+<li>
+<a href="#shop">Shop</a>
+</li>
+<li>
+<a href="#about">About</a>
+</li>
+<li>
+<a href="#contact">Contact</a>
+</li>
+</ul>
+</div>
+<div>
+<h4>Categories</h4>
+<ul>
+<li>Baby Toys</li>
+<li>RC Toys</li>
+<li>Educational</li>
+<li>Soft Toys</li>
+</ul>
+</div>
+<div>
+<h4>Order</h4>
+<p>📱 WhatsApp Orders</p>
+<p>💳 UPI Payment</p>
+<p>🚚 Home Delivery</p>
+</div>
+</div>
+<div class="copyright">© 2026 <span id="copyrightName">YOUR STORE</span> — Made with ❤️</div>
+</footer>
+<a class="floatWA" href="#" onclick="openGeneralWhatsApp();return false;">☏</a>
+
+<div class="modal" id="productModal">
+<div class="modalBox">
+<button class="close" onclick="closeModal()">×</button>
+<div class="modalProduct">
+<img id="modalImage" src="" alt="Product">
+<div>
+<h2 id="modalName">
+</h2>
+<div class="modalPrice" id="modalPrice">
+</div>
+</div>
+</div>
+<h3 class="formTitle">📦 Delivery Details</h3>
+<div class="formNote">Order delivery ke liye apna sahi naam, mobile number aur address bharein. Ye details WhatsApp order message me jayengi.</div>
+<div class="formGrid">
+<div class="field">
+<label>Full Name *</label>
+<input id="customerName" type="text" placeholder="Enter your name">
+</div>
+<div class="field">
+<label>Mobile Number *</label>
+<input id="customerMobile" type="tel" maxlength="10" placeholder="10 digit mobile number">
+</div>
+<div class="field">
+<label>State *</label>
+<input id="customerState" type="text" placeholder="e.g. Haryana">
+</div>
+<div class="field">
+<label>District *</label>
+<input id="customerDistrict" type="text" placeholder="e.g. Nuh">
+</div>
+<div class="field">
+<label>PIN Code *</label>
+<input id="customerPin" type="tel" maxlength="6" placeholder="6 digit PIN code">
+</div>
+<div class="field full">
+<label>Full Delivery Address *</label>
+<textarea id="customerAddress" placeholder="Village/House No./Street/Landmark/Post Office etc.">
+</textarea>
+</div>
+</div>
+<button class="submitBtn" onclick="submitOrder()">✓ Submit & Order on WhatsApp</button>
+<div class="scanner">
+<h3>💳 Scan & Pay</h3>
+<p class="scanText">Payment karne ke liye neeche scanner scan karein.</p>
+<img id="scannerImage" src="" alt="Payment Scanner">
+<p class="scanText">Apna payment scanner JavaScript setting me add kar sakte hain.</p>
+<button class="modalOrder" onclick="quickWhatsApp()">📱 Order on WhatsApp</button>
+</div>
+</div>
+</div>
+
+<script>
+    const STORE_NAME="Sahajat toy Store";
+    const WHATSAPP_NUMBER="917056163536";
+    const PAYMENT_SCANNER="https://placehold.co/500x500/ffffff/5b4bdb?text=YOUR+PAYMENT+SCANNER";
+    const products=[
+    ["Remote Control Car","Remote Control",799,999,"Fast remote control racing car.","1.jpg"],
+    ["Toy Robot","Remote Control",699,899,"Fun dancing toy robot.","2.jpg"],
+    ["Building Blocks","Educational",499,699,"Creative building blocks for kids.","3.jpg"],
+    ["Teddy Bear","Soft Toys",599,799,"Soft and cuddly teddy bear.","4.jpg"],
+    ["Princess Doll","Dolls",499,699,"Beautiful princess doll.","5.jpg"],
+    ["Toy Kitchen Set","Games",649,899,"Pretend kitchen set for kids.","6.jpg"],
+    ["Baby Walker","Baby Toys",1299,1599,"Colourful baby learning walker.","7.jpg"],
+    ["Musical Piano","Educational",399,549,"Colourful musical piano toy.","8.jpg"],
+    ["RC Helicopter","Remote Control",1199,1499,"Remote control flying helicopter.","9.jpg"],
+    ["Toy Train","Vehicles",549,699,"Colourful toy train set.","10.jpg"],
+    ["Educational Puzzle","Educational",299,399,"Brain-building puzzle for children.","11.jpg"],
+    ["Drawing Board","Educational",349,499,"Reusable drawing and writing board.","12.jpg"],
+    ["Doctor Set","Games",449,599,"Pretend doctor play set.","13.jpg"],
+    ["Racing Car","Vehicles",449,599,"Stylish mini racing car.","14.jpg"],
+    ["Dinosaur Toy","Games",349,499,"Fun dinosaur action toy.","15.jpg"],
+    ["Cute Soft Toy","Soft Toys",449,599,"Soft animal plush toy.","16.jpg"],
+    ["Mini Truck","Vehicles",399,499,"Mini construction truck.","17.jpg"],
+    ["Toy Jeep","Vehicles",499,699,"Adventure toy jeep.","18.jpg"],
+    ["Cricket Set","Outdoor",349,499,"Complete kids cricket set.","19.jpg"],
+    ["Football","Outdoor",299,399,"Kids football for outdoor play.","20.jpg"],
+    ["Basketball","Outdoor",349,449,"Fun basketball for kids.","21.jpg"],
+    ["Bubble Gun","Outdoor",299,399,"Automatic bubble blowing toy.","22.jpg"],
+    ["Water Toy","Outdoor",249,349,"Fun summer water toy.","23.jpg"],
+    ["Magnetic Blocks","Educational",699,899,"Magnetic creative construction set.","24.jpg"],
+    ["Learning Tablet","Educational",799,999,"Kids learning activity tablet.","25.jpg"],
+    ["Alphabet Puzzle","Educational",299,399,"Learn alphabets while playing.","26.jpg"],
+    ["Number Puzzle","Educational",299,399,"Fun number learning puzzle.","27.jpg"],
+    ["Shape Sorter","Baby Toys",349,499,"Colour and shape learning toy.","28.jpg"],
+    ["Baby Rattle","Baby Toys",199,299,"Cute colourful baby rattle.","29.jpg"],
+    ["Toy Bus","Vehicles",399,549,"Colourful city toy bus.","30.jpg"],
+    ["Toy Tractor","Vehicles",449,599,"Farm style toy tractor.","31.jpg"],
+    ["Toy Makeup Set","Games",499,699,"Pretend makeup play set.","32.jpg"],
+    ["Baby Doll","Dolls",449,599,"Cute baby doll for kids.","33.jpg"],
+    ["Animal Set","Games",399,549,"Colourful animal figures.","34.jpg"],
+    ["Construction Vehicle Set","Vehicles",599,799,"Mini construction vehicles.","35.jpg"],
+    ["Toy Camera","Educational",399,549,"Kids pretend photography camera.","36.jpg"],
+    ["Musical Toy","Baby Toys",349,499,"Fun colourful musical toy.","37.jpg"],
+    ["Toy Gun","Games",399,549,"Colourful foam dart toy.","38.jpg"],
+    ["Toy Bike","Vehicles",499,649,"Mini kids ride-on style toy.","39.jpg"],
+    ["Toy Aeroplane","Vehicles",349,499,"Colourful toy aeroplane.","40.jpg"],
+    ["Stacking Rings","Baby Toys",249,349,"Colourful stacking rings.","41.jpg"],
+    ["Toy Drum","Baby Toys",299,399,"Fun musical drum toy.","42.jpg"],
+    ["Memory Game","Games",249,349,"Fun memory matching game.","43.jpg"],
+    ["Kids Chess","Games",399,499,"Beginner chess board for kids.","44.jpg"],
+    ["Jigsaw Puzzle","Games",349,499,"Colourful jigsaw puzzle.","45.jpg"],
+    ["Toy Bus Set","Vehicles",499,649,"Mini vehicle play set.","46.jpg"],
+    ["Soft Elephant","Soft Toys",549,699,"Cute soft elephant plush.","47.jpg"],
+    ["Soft Rabbit","Soft Toys",499,649,"Soft rabbit plush toy.","48.jpg"],
+    ["Princess Castle","Dolls",699,899,"Beautiful princess castle set.","49.jpg"],
+    ["Toy Kitchen Cooker","Games",399,549,"Pretend cooking toy.","50.jpg"],
+    ["Learning Flash Cards","Educational",199,299,"Colourful educational flash cards.","51.jpg"],
+    ["Kids Activity Set","Educational",449,599,"Fun educational activity kit.","52.jpg"]
+    ];
+    let selectedProduct=null;
+    const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+    document.getElementById("logoName").innerHTML=esc(STORE_NAME)+' <span>★</span>';
+    document.getElementById("footerName").textContent=STORE_NAME;
+    document.getElementById("copyrightName").textContent=STORE_NAME;
+    document.getElementById("scannerImage").src=PAYMENT_SCANNER;
+    function renderProducts(){
+    const grid=document.getElementById("productGrid"), q=document.getElementById("search").value.toLowerCase().trim(), cat=document.getElementById("categoryFilter").value;
+    const filtered=products.filter(p=>(p[0].toLowerCase().includes(q)||p[1].toLowerCase().includes(q))&&(cat==="All"||p[1]===cat));
+    if(!filtered.length){grid.innerHTML='<div class="noProducts">😔 No toys found.</div>';return}
+    grid.innerHTML=filtered.map(p=>`<div class="card">
+    <img src="${p[5]}" alt="${esc(p[0])}" loading="lazy">
+    <div class="cardBody">
+    <h3>${esc(p[0])}</h3>
+    <div class="desc">${esc(p[4])}</div>
+    <div class="price">₹${p[2]} <span class="old">₹${p[3]}</span>
+    </div>
+    <div class="cardBtns">
+    <button class="btn shopBtn" onclick="openProduct(${products.indexOf(p)})">Shop Now</button>
+    <button class="btn waBtn" onclick="orderWhatsApp('${p[0].replace(/\\/g,"\\\\").replace(/'/g,"\\'")}')">WhatsApp</button>
+    </div>
+    </div>
+    </div>`).join("");
+    }
+    function openProduct(i){selectedProduct=products[i];document.getElementById("modalImage").src=selectedProduct[5];document.getElementById("modalName").textContent=selectedProduct[0];document.getElementById("modalPrice").textContent="₹"+selectedProduct[2];document.getElementById("productModal").style.display="block";document.body.style.overflow="hidden"}
+    function closeModal(){document.getElementById("productModal").style.display="none";document.body.style.overflow=""}
+    document.getElementById("productModal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeModal()});
+    function validWhatsApp(){if(!WHATSAPP_NUMBER||WHATSAPP_NUMBER==="YOUR WHATSAPP NUMBER"){alert("Please add your WhatsApp number at the top of the HTML file. Example: 919876543210");return false}return true}
+    function submitOrder(){
+    if(!selectedProduct)return alert("Please select a product first.");
+    if(!validWhatsApp())return;
+    const name=document.getElementById("customerName").value.trim(),mobile=document.getElementById("customerMobile").value.trim(),state=document.getElementById("customerState").value.trim(),district=document.getElementById("customerDistrict").value.trim(),pin=document.getElementById("customerPin").value.trim(),address=document.getElementById("customerAddress").value.trim();
+    if(!name||!mobile||!state||!district||!pin||!address)return alert("Please fill all delivery details.");
+    if(!/^[0-9]{10}$/.test(mobile))return alert("Please enter a valid 10 digit mobile number.");
+    if(!/^[0-9]{6}$/.test(pin))return alert("Please enter a valid 6 digit PIN code.");
+    const msg=`🛍️ NEW ORDER - ${STORE_NAME}
+    📦 Product: ${selectedProduct[0]}
+    💰 Price: ₹${selectedProduct[2]}
+    👤 Customer Name: ${name}
+    📱 Mobile: ${mobile}
+    📍 State: ${state}
+    📍 District: ${district}
+    📌 PIN Code: ${pin}
+    🏠 Full Delivery Address:
+    ${address}
+    💳 Payment: UPI / Scanner
+    Please confirm my order.`;
+    window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(msg),"_blank");
+    }
+    function quickWhatsApp(){
+    if(!selectedProduct||!validWhatsApp())return;
+    const msg=`I want to buy this ${selectedProduct[0]}
+    Product: ${selectedProduct[0]}
+    Price: ₹${selectedProduct[2]}
+    Please contact me for this order.`;
+    window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(msg),"_blank");
+    }
+    function orderWhatsApp(name){
+    if(!validWhatsApp())return;
+    window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent("I want to buy this "+name),"_blank");
+    }
+    function openGeneralWhatsApp(){
+    if(!validWhatsApp())return;
+    window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(`Hello ${STORE_NAME}, I want to know about your toys.`),"_blank");
+    }
+    function filterCategory(c){document.getElementById("categoryFilter").value=c;renderProducts();document.getElementById("shop").scrollIntoView({behavior:"smooth"})}
+    function toggleMenu(){document.getElementById("navLinks").classList.toggle("active")}
+    document.querySelectorAll(".navlinks a").forEach(a=>a.addEventListener("click",()=>document.getElementById("navLinks").classList.remove("active")));
+    renderProducts();
+</script>
+</body>
+</html>
